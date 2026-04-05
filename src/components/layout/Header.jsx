@@ -1,5 +1,6 @@
 import React from 'react';
 import { ShoppingCart } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Header = ({ cartCount, onOpenCart }) => {
   return (
@@ -19,10 +20,16 @@ const Header = ({ cartCount, onOpenCart }) => {
         alignItems: 'center',
         width: '100%'
       }}>
-        <h1 style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--text-primary)' }}>
+        <Link to="/" style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--text-primary)', display: 'block' }}>
           Tech<span style={{ color: 'var(--accent)' }}>Store.</span>
-        </h1>
-        <nav>
+        </Link>
+        <nav style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+          <Link to="/store" style={{
+            color: 'var(--text-secondary)', fontWeight: 600, padding: '8px', transition: 'color 0.2s', margin: '0 8px'
+          }}
+          onMouseOver={(e) => e.currentTarget.style.color = 'var(--text-primary)'}
+          onMouseOut={(e) => e.currentTarget.style.color = 'var(--text-secondary)'}
+          >Store</Link>
           <button style={{
             color: 'var(--text-primary)',
             display: 'flex',

@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { X, Trash2 } from 'lucide-react';
+import CheckoutModal from './CheckoutModal';
 
-const CartSidebar = ({ isOpen, onClose, cartItems, onRemove }) => {
+const CartSidebar = ({ isOpen, onClose, cartItems, onRemove, onClearCart }) => {
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const total = cartItems.reduce((sum, item) => sum + item.price, 0);
 
   return (
@@ -67,10 +69,13 @@ const CartSidebar = ({ isOpen, onClose, cartItems, onRemove }) => {
               <span style={{ fontSize: '1.1rem', color: 'var(--text-secondary)' }}>Total</span>
               <span style={{ fontSize: '1.25rem', fontWeight: 700 }}>${total.toFixed(2)}</span>
             </div>
-            <button style={{
+            <button 
+              onClick={() => setIsCheckoutOpen(true)}
+              style={{
               width: '100%', padding: '16px', borderRadius: '12px',
               backgroundColor: 'var(--accent)', color: 'white',
               fontSize: '1.1rem', fontWeight: 600, transition: 'background-color 0.2s',
+              cursor: 'pointer'
             }}
             onMouseOver={(e) => e.currentTarget.style.backgroundColor = 'var(--accent-hover)'}
             onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'var(--accent)'}
@@ -80,6 +85,17 @@ const CartSidebar = ({ isOpen, onClose, cartItems, onRemove }) => {
           </div>
         )}
       </div>
+
+      <CheckoutModal 
+        isOpen={isCheckoutOpen} 
+        onClose={() => setIsCheckoutOpen(false)} 
+        totalAmount={total}
+        onComplete={() => {
+          onClearCart();
+          setIsCheckoutOpen(false);
+          onClose(); // close sidebar too
+        }}
+      />
     </>
   );
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Plus } from 'lucide-react';
-import '../styles/global.css';
+import '../../styles/global.css';
 
 const ProductCard = ({ product, onAdd, onSelect }) => {
   return (

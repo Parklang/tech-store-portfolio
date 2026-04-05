@@ -1,8 +1,7 @@
 import React from 'react';
 import ProductCard from '../components/ui/ProductCard';
-import { products } from '../data/products';
 
-const ProductList = ({ onAddToCart, onProductSelect }) => {
+const ProductList = ({ products, onAddToCart, onProductSelect }) => {
   return (
     <div style={{
       display: 'grid',
